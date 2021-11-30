@@ -1,5 +1,13 @@
-
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Launcher {
 
     public static int fibo(int n){
@@ -46,6 +54,35 @@ public class Launcher {
                     resultat = fibo(nbre);
                     System.out.println("le " + nbre + "ieme element de la suite est : " + resultat);
 
+                    b = false;
+                    break;
+
+                case "freq":
+                    System.out.println("Veuillez saisir un chemin de fichier: ");
+                    str = sc.nextLine();
+                    str = str.trim();
+                    Path path = Paths.get(str);
+                    int rep = 0;
+                    int[] repeat = new int[20];
+                    String mot = "";
+                    String[] motFreq = new String[20];
+                    try {
+                        String readFilePath = Files.readString(path).replaceAll("\\p{Punct}", "");
+                        System.out.println("Contenu du fichier: \n" + readFilePath);
+                        String[] words = readFilePath.split(" ");
+                        var freqCaseInSensitive = Arrays.stream(words)
+                                .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()));
+
+
+
+                        //List<Integer> sortedList = Arrays.stream(freqCaseInSensitive)
+                          //      .sorted(Comparator.reverseOrder())
+                            //    .collect(Collectors.toList());
+
+                        System.out.println(freqCaseInSensitive);
+                    } catch (IOException e) {
+                        System.out.println("Unreadable file \n" + e.getClass() + "\n" + e.getMessage());
+                    }
                     b = false;
                     break;
 
