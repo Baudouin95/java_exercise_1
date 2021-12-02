@@ -87,6 +87,8 @@ public class Launcher {
                     break;
 
                 default:
+                    System.out.println("Unknown command");
+                    b = false;
                     break;
             }
 
